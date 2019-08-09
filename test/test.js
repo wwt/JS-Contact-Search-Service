@@ -136,15 +136,53 @@ describe('Contact Service', () => {
 
         describe('searchable fields', () => {
             it('should be searchable by phone number', async () => {
+                const contact = createContact({ firstName: 'First', lastName: 'Last', primaryPhoneNumber: '314-555-0000' });
+                
+                await flush();
 
+                expect(service.search('314555').length).to.equal(1); // ignores special characters in contact
+                expect(service.search('(314) 555').length).to.equal(1); // ignores special characters in search
+                expect(service.search('555').length).to.equal(1); // doesn't need to be start of phone number
+                expect(service.search('314655').length).to.equal(0);
+            });
+
+            it('should be searchable by any name variation', async () => {
+                const contact = createContact({ firstName: 'First', lastName: 'Last', nickName: 'Joey', primaryPhoneNumber: '314-555-0000' });
+                
+                await flush();
+
+                expect(service.search('First').length).to.equal(1); // first name
+                expect(service.search('irs').length).to.equal(1); // partial first name
+                expect(service.search('Last').length).to.equal(1); // last name
+                expect(service.search('as').length).to.equal(1); // partial last name
+                expect(service.search('Joe').length).to.equal(1); // nick name
+                expect(service.search('oe').length).to.equal(1); // partial nick name
+                expect(service.search('First Last').length).to.equal(1); // first + last
+                expect(service.search('Joey Last').length).to.equal(1); // nick + last
+                expect(service.search('314655').length).to.equal(0);
+            });
+
+            it('should be searchable by name and phone combo', async () => {
+                const contact = createContact({ firstName: 'First', lastName: 'Last', primaryPhoneNumber: '314-555-0000' });
+                
+                await flush();
+
+                expect(service.search('First 314').length).to.equal(1);
+                expect(service.search('Last 555').length).to.equal(1);
+                expect(service.search('First Last 314555').length).to.equal(1);
+                expect(service.search('First Last 314666').length).to.equal(0);
+                expect(service.search('First Larst 314555').length).to.equal(0);
+                expect(service.search('Fist Last 314555').length).to.equal(0);
             });
         });
 
         describe('special search syntax (bonus)', () => {
-            // search by specific field (e.g. name:First role:Developer)
-            // search in specific time (e.g. from:2019-01-01 to:2019-01-01)
-            // search by regex (e.g. /^Dan\w*$/i)
-            // limit returned fields (e.g. return:name,role)
+            // suggestions:
+            //  - search by specific field (e.g. name:First role:Developer)
+            //  - search in specific time (e.g. from:2019-01-01 to:2019-01-01)
+            //  - search by regex (e.g. /^Dan\w*$/i)
+            //  - limit returned fields (e.g. return:name,role)
+            //  - order results by best matching
         });
     });
 });
