@@ -7,8 +7,19 @@ configuration:
       - unit.xml
   ide_config:
     default_open_files:
-      - stringFormatter/app.js
+      - contactService/index.js
+    test_case_weights:
+      should return newly added contact: 0.1
+      should return multiple matching contacts: 0.1
+      should not return a contact before retrieving all the details from the service: 0.1
+      should return the expected fields in the expected format: 0.2
+      should return the updated change to a name: 0.1
+      should not return removed contacts: 0.1
+      should be searchable by phone number: 0.1
+      should be searchable by any name variation: 0.1
+      should be searchable by name and phone combo: 0.1
     project_menu:
       run: npm start
       install: npm install
       test: npm test
+      quick-test: npm run quick-test
