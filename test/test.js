@@ -83,7 +83,7 @@ describe('Contact Service', () => {
 
             it('should return the expected fields in the expected format', async () => {
                 const contact = createContact({ firstName: 'First', lastName: 'Last', primaryPhoneNumber: '314-555-0000', emailAddress: 'first.last@mail.com', role: 'Cool Kid' });
-                const contact2 = createContact({ firstName: 'First', lastName: 'Last', nickName: 'Joe', primaryPhoneNumber: '314-555-0001', secondPhoneNumber: '+13145551234' });
+                const contact2 = createContact({ firstName: 'First', lastName: 'Last', nickName: 'Joe', primaryPhoneNumber: '314-555-0001', secondaryPhoneNumber: '+13145551234' });
                 
                 await flush();
                 const results = service.search('First');
