@@ -3,7 +3,7 @@ import updates from './updates';
 const contacts = {};
 
 function reset() {
-    for (id in contacts) {
+    for (let id in contacts) {
         delete contacts[id];
     }
 }

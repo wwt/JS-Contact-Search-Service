@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { flush } from '../utilities/timeout';
 import Contact from '../accessLayer/model';
-import contacts, { addedContact, changedContact, removedContact, reset } from '../accessLayer/data';
+import contacts, { addedContact, modifiedContact, removedContact, reset } from '../accessLayer/data';
 import ContactService from '../contactService';
 import uuid from '../utilities/uuid';
 
@@ -22,7 +22,7 @@ function changeContact(contact, props) {
     Object.assign(contact, props);
 
     for (let prop in props) {
-        changedContact(contact.id, prop, props[prop]);
+        modifiedContact(contact.id, prop, props[prop]);
     }
 
     return contact;
