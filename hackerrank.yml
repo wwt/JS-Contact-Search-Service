@@ -7,7 +7,9 @@ configuration:
       - unit.xml
   ide_config:
     default_open_files:
+      - README.md
       - contactService/index.js
+      - test/test.js
     test_case_weights:
       Contact Service search add event should return newly added contact: 0.1
       Contact Service search add event should return multiple matching contacts: 0.1
@@ -22,4 +24,3 @@ configuration:
       run: npm start
       install: npm install
       test: npm test
-      quick-test: npm run quick-test

@@ -4,6 +4,6 @@ import contacts from './data';
 export default {
     async getById(id) {
         await timeout();
-        return contacts[id] || null;
+        return JSON.parse(JSON.stringify(contacts[id] || null));
     }
 }

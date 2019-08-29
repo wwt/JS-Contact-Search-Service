@@ -1,15 +1,10 @@
 import { expect } from 'chai';
 import { flush } from '../utilities/timeout';
 import Contact from '../accessLayer/model';
+import accessLayer from '../accessLayer';
 import contacts, { addedContact, modifiedContact, removedContact, reset } from '../accessLayer/data';
 import ContactService from '../contactService';
 import uuid from '../utilities/uuid';
-
-function isClass(func) {
-    return typeof func === 'function' && (/^class\s/.test(Function.prototype.toString.call(func))
-        || /_classCallCheck/.test(Function.prototype.toString.call(func)) // needed for transpile check
-    );
-}
 
 function createContact(props) {
     const id = uuid();
@@ -40,7 +35,7 @@ describe('Contact Service', () => {
     let service;
 
     beforeEach(() => {
-        service = isClass(ContactService) ? new ContactService() : ContactService();
+        service = new ContactService(accessLayer.updates, accessLayer.service);
     });
     
     afterEach(reset);
@@ -176,7 +171,11 @@ describe('Contact Service', () => {
             });
         });
 
-        describe('special search syntax (bonus)', () => {
+        describe('special search syntax', () => {
+            // NOTE: THESE TESTS WILL NOT AFFECT YOUR FINAL SCORE AND ARE COMPLETELY OPTIONAL
+
+            // these tests are simply a way for you to give us more code to look at if you so desire
+
             // suggestions:
             //  - search by specific field (e.g. name:First role:Developer)
             //  - search in specific time (e.g. from:2019-01-01 to:2019-01-01)
