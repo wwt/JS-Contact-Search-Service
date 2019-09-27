@@ -2,7 +2,9 @@
 
 A customer has asked you to implement an interface to let them search through contacts in their system.
 They would like to be able to type into a search bar a name (first, last, nickname), phone number, email, or
-role and get back a list of contacts. They have provided you access to their contact list through two entry points:
+role and get back a list of contacts. While the current system has all the information, searching is not
+supported and the response time does not meet the performance needs, so it is up to you to manage the data for
+searching. They have provided you access to their contact list through two entry points:
 the access layer service and the access layer update event emitter.
 
 ------
@@ -15,6 +17,11 @@ the API request when a search field is typed in on the website. There are alread
 you can feel free to add your own. The time taken to complete this exercise is ignored so please **take as much time
 as you need**. We encourage you to refactor your code and try to solve this problem in a way as close to how you would
 do it for an official product.
+
+It is **highly** recommended that you clone the code to your own machine, as the current HackerRank online editor does
+not provide a great user experience. As of writing, HackerRank will run your code in [NodeJS v10.15.10](https://www.hackerrank.com/environment),
+but we have provided a transpiler (babel) to ensure you have access to all of ES6 and below. It is possible your code
+will be referenced later in the interview process.
 
 ## Documentation
 
@@ -39,10 +46,8 @@ The event emitter object provides a method for consuming data from events:
 interface Emitter {
     on(event: String, listener: Function): Function
 }
-
-emitter.on('event', (value) => {
-    console.log(value);
-});
+// example usage of similar interface in js
+emitter.on('event', (value) => console.log(value));
 ```
 
 The returned function when called unsubscribes the passed listener from the passed event.
@@ -63,45 +68,9 @@ The service object provides a method for retrieving a contact's information asyn
 interface Service {
     getById(id: String): Promise<Contact>
 }
+// example usage of similar interface in js:
+service.get('key').then(value => console.log(value));
 ```
 
 The returned promise will resolve to the contact. You may assume that if you receive an ID from the emitter, it will
 return the corresponding contact.
-
-
-## TODO
-
-### Purpose of this new test
-
- - The current test is too language agnostic and not related to what typical work looks like
- - The current test does not use a JS ecosystem (opaque tests, no need to look at other files, no importing/requiring)
- - The current test does not give us a clean pass/fail -> interview/no-interview mapping
- - The current test does not feel like a problem that encourages refactoring and is rather hard to refactor once you've chosen whether you're using loops, OOP, or functional.
- - The current test does not involve asynchronous or event-based behavior common in JS development
-
-### Changes to talk about
- - allowing class vs. factory
- - level of documentation
- - bonus test section
- - test weighting
-
-### Changes to make
-
-#### README
- - *** Highly recommend NOT to use the online HR editor ***
- - *** You are making a caching layer *** because their layer is too slow
- - You do not need to import any dependencies
- - Add something about you may see this code later
- - something about what version of node/transpiler is running
-
-#### Tests
- - Bonus Testing Section should probably be removed
-    - could become a pairing exercise in interview
- - Should make sure test file is not changed in sumbission
-
-#### Code
- - thing to change
-
-#### Misc
- - solicit reasoning behind design choices potentially
- - 

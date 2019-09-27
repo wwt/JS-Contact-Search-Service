@@ -170,18 +170,5 @@ describe('Contact Service', () => {
                 expect(service.search('Fist Last 314555').length).to.equal(0);
             });
         });
-
-        describe('special search syntax', () => {
-            // NOTE: THESE TESTS WILL NOT AFFECT YOUR FINAL SCORE AND ARE COMPLETELY OPTIONAL
-
-            // these tests are simply a way for you to give us more code to look at if you so desire
-
-            // suggestions:
-            //  - search by specific field (e.g. name:First role:Developer)
-            //  - search in specific time (e.g. from:2019-01-01 to:2019-01-01)
-            //  - search by regex (e.g. /^Dan\w*$/i)
-            //  - limit returned fields (e.g. return:name,role)
-            //  - order results by best matching
-        });
     });
 });
