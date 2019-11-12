@@ -69,7 +69,7 @@ interface Service {
     getById(id: String): Promise<Contact>
 }
 // example usage of similar interface in js:
-service.get('key').then(value => console.log(value));
+service.getById('key').then(value => console.log(value));
 ```
 
 The returned promise will resolve to the contact. You may assume that if you receive an ID from the emitter, it will
