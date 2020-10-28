@@ -8,7 +8,7 @@ searching. They have provided you access to their contact list through two entry
 the access layer service and the access layer update event emitter.
 
 ------
-Implement the missing contactService as a class with the following methods:
+Implement the contactService class with the following method:
 
  - `search(query: String)`: the method requested by the customer
 
@@ -29,7 +29,7 @@ will be referenced later in the interview process.
 
 The access layer update event emitter (`./accessLayer/updates.js`, first argument to constructor) provides a way to
 subscribe to the various types of updates that come through your customer's system. It's important to make sure your version
-of the data is as up to date as possible. Any emitted event can be one of the following:
+of the data is as up to date as possible. An emitted event can be one of the following:
 
  - `add`: indicates a contact has been added to the system and provides the ID of the new contact.
  - `change`: indicates a contact's info has been updated and provides the ID, field, and value of the changed contact.
@@ -69,7 +69,7 @@ interface Service {
     getById(id: String): Promise<Contact>
 }
 // example usage of similar interface in js:
-service.get('key').then(value => console.log(value));
+service.getById('key').then(value => console.log(value));
 ```
 
 The returned promise will resolve to the contact. You may assume that if you receive an ID from the emitter, it will
