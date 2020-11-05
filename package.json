@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "pretest": "npm install && (npm run quick-test || true)",
-    "test": "./node_modules/.bin/mocha test --require @babel/register --reporter mocha-junit-reporter --reporter-options mochaFile=./unit.xml",
-    "quick-test": "./node_modules/.bin/mocha test --require @babel/register"
+    "pretest": "npm install && (npm run test || true)",
+    "test": "./node_modules/.bin/mocha test --require @babel/register",
+    "test:watch": "./node_modules/.bin/mocha test --require @babel/register --watch"
   },
   "dependencies": {
     "@babel/core": "^7.4.5",

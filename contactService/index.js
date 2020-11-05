@@ -6,4 +6,8 @@ export default class {
     constructor(updates, service) {
 
     }
+
+    search(query) {
+        return [];
+    }
 }
