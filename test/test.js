@@ -31,6 +31,7 @@ function removeContact(contact) {
     return contact;
 }
 
+// You may add your own tests or comment tests out as you work, but please submit with all tests running
 describe('Contact Service', () => {
     let service;
 
@@ -135,8 +136,8 @@ describe('Contact Service', () => {
                 
                 await flush();
 
-                expect(service.search('314555').length).to.equal(1); // ignores special characters in contact
-                expect(service.search('(314) 555').length).to.equal(1); // ignores special characters in search
+                expect(service.search('314555').length).to.equal(1); // ignores special characters inserted on contact creation
+                expect(service.search('(314) 555').length).to.equal(1); // ignores special characters when searching
                 expect(service.search('555').length).to.equal(1); // doesn't need to be start of phone number
                 expect(service.search('314655').length).to.equal(0);
             });
@@ -154,7 +155,7 @@ describe('Contact Service', () => {
                 expect(service.search('oe').length).to.equal(1); // partial nick name
                 expect(service.search('First Last').length).to.equal(1); // first + last
                 expect(service.search('Joey Last').length).to.equal(1); // nick + last
-                expect(service.search('314655').length).to.equal(0);
+                expect(service.search('Firsty').length).to.equal(0);
             });
 
             it('should be searchable by name and phone combo', async () => {

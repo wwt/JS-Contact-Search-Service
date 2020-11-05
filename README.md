@@ -1,4 +1,4 @@
-# Who Am I
+# Contact Search Service
 
 A customer has asked you to implement an interface to let them search through contacts in their system.
 They would like to be able to type into a search bar a name (first, last, nickname), phone number, email, or
@@ -17,11 +17,6 @@ the API request when a search field is typed in on the website. There are alread
 you can feel free to add your own. The time taken to complete this exercise is ignored so please **take as much time
 as you need**. We encourage you to refactor your code and try to solve this problem in a way as close to how you would
 do it for an official product.
-
-It is **highly** recommended that you clone the code to your own machine, as the current HackerRank online editor does
-not provide a great user experience. As of writing, HackerRank will run your code in [NodeJS v10.15.10](https://www.hackerrank.com/environment),
-but we have provided a transpiler (babel) to ensure you have access to all of ES6 and below. It is possible your code
-will be referenced later in the interview process.
 
 ## Documentation
 
