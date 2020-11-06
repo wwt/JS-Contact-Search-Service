@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "pretest": "npm install && (npm run test || true)",
+    "pretest": "npm install",
     "test": "./node_modules/.bin/mocha test --require @babel/register",
     "test:watch": "./node_modules/.bin/mocha test --require @babel/register --watch"
   },
