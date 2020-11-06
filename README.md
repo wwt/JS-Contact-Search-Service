@@ -1,6 +1,9 @@
 # Contact Search Service
 
-A customer has asked you to implement an interface to let them search through contacts in their system.
+A customer has asked you to implement an interface to let them search through contacts in their system. The
+problem is, their system is slow...super slow. And they want the search to be fast...super fast. Because of this,
+you'll need to cache any information you pull out of their system to be able to respond quickly to a search.
+
 They would like to be able to type into a search bar a name (first, last, nickname), phone number, email, or
 role and get back a list of contacts. While the current system has all the information, searching is not
 supported and the response time does not meet the performance needs, so it is up to you to manage the data for
