@@ -63,12 +63,12 @@ correct format requested by the customer and must be mapped to the desired struc
 
 ```ts
 {
-    id: string
-    role: string,
-    name: string,
-    email: string,
-    phones: Array<string>,
-    address: string,
+    id: String
+    role: String,
+    name: String,
+    email: String,
+    phones: Array<String>,
+    address: String,
 }
 ```
 
