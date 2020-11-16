@@ -17,9 +17,11 @@ Implement the contactService class with the following method:
 
 Assume that someone else is working on the front end and that a backend service will use your new service to handle
 the API request when a search field is typed in on the website. There are already tests written for your service, but
-you can feel free to add your own. The time taken to complete this exercise is ignored so please **take as much time
-as you need**. We encourage you to refactor your code and try to solve this problem in a way as close to how you would
-do it for an official product.
+you can feel free to add your own. We encourage you to refactor your code and try to solve this problem in a way as 
+close to how you would do it for an official product.
+
+**Note:** the `search` function is written as a synchronous function to ensure you are fetching and caching the contacts.
+You must adhere to this contract in order to pass all of the tests.
 
 ## Documentation
 
@@ -54,8 +56,23 @@ The returned function when called unsubscribes the passed listener from the pass
 
 The access layer service (`./accessLayer/service.js`, second argument to constructor) provides a single method
 that returns a contact by id. The service can take some time to respond so it returns a promise of a contact containing
-all the relevant information stored under that ID (names, phone numbers, etc.). However, this information is not in the
-same format requested by the customer and must be mapped to the desired structure.
+all of the relevant information stored under that ID (names, phone numbers, etc.). 
+
+The information coming from the service layer is not in the
+correct format requested by the customer and must be mapped to the desired structure:
+
+```ts
+{
+    id: String
+    role: String,
+    name: String,
+    email: String,
+    phones: Array<String>,
+    address: String,
+}
+```
+
+The name string is formatted from the first name (or nick name if it exists) and last name. Phone numbers should be formatted as `(xxx) xxx-xxxx` regardless of how they are returned by the service layer.
 
 #### Service Object
 
