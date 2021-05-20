@@ -1,16 +1,21 @@
 import { expect } from 'chai';
-import { flush } from '../utilities/timeout';
+import { flush as flushPromises } from '../utilities/timeout';
 import Contact from '../accessLayer/model';
 import accessLayer from '../accessLayer';
-import contacts, { addedContact, modifiedContact, removedContact, reset } from '../accessLayer/data';
+import contacts, { addedContact, lock, modifiedContact, removedContact, reset, unlock } from '../accessLayer/data';
 import ContactService from '../contactService';
 import uuid from '../utilities/uuid';
 
+const testLock = Symbol('test.lock');
+contacts[lock] = testLock;
+
 function createContact(props) {
     const id = uuid();
-    contacts[id] = new Contact(id, props);
+    contacts[unlock] = testLock;
+    const c = contacts[id] = new Contact(id, props);
+    contacts[lock] = testLock;
     addedContact(id);
-    return contacts[id];
+    return c;
 }
 
 function changeContact(contact, props) {
@@ -24,11 +29,19 @@ function changeContact(contact, props) {
 }
 
 function removeContact(contact) {
+    contacts[unlock] = testLock;
     delete contacts[contact.id];
+    contacts[lock] = testLock;
 
     removedContact(contact.id);
 
     return contact;
+}
+
+async function flush() {
+    contacts[unlock] = testLock;
+    await flushPromises();
+    contacts[lock] = testLock;
 }
 
 // You may add your own tests or comment tests out as you work, but please submit with all tests running
@@ -68,7 +81,7 @@ describe('Contact Service', () => {
             });
 
             it('should map the returned contacts to the expected data format', async () => {
-                const contact = createContact({ firstName: 'First', lastName: 'Last', primaryPhoneNumber: '314-555-0000', emailAddress: 'first.last@mail.com', role: 'Cool Kid'});
+                const contact = createContact({ firstName: 'First', lastName: 'Last', primaryPhoneNumber: '314-555-0000', primaryEmail: 'first.last@mail.com' });
                 
                 await flush();
                 const results = service.search('First');
@@ -79,7 +92,6 @@ describe('Contact Service', () => {
                     phones: ['(314) 555-0000'],
                     email: 'first.last@mail.com',
                     address: '',
-                    role: 'Cool Kid',
                     id: contact.id
                 });
             });
@@ -110,13 +122,12 @@ describe('Contact Service', () => {
                     phones: ['(314) 555-0001', '(314) 555-1234'],
                     email: '',
                     address: '',
-                    role: 'Employee',
                     id: contact.id
                 });
             });
 
             it('should map the contact name to nickName lastName if applicable', async () => {
-                const contact = createContact({ firstName: 'First', lastName: 'Last', nickName: 'Joe', primaryPhoneNumber: '314-555-0000', emailAddress: 'joe.last@mail.com', role: 'Cool Kid'});
+                const contact = createContact({ firstName: 'First', lastName: 'Last', nickName: 'Joe', primaryPhoneNumber: '314-555-0000', primaryEmail: 'joe.last@mail.com' });
                 
                 await flush();
                 const results = service.search('First');
@@ -127,7 +138,6 @@ describe('Contact Service', () => {
                     phones: ['(314) 555-0000'],
                     email: 'joe.last@mail.com',
                     address: '',
-                    role: 'Cool Kid',
                     id: contact.id
                 });
             });

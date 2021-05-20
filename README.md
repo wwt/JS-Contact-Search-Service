@@ -63,8 +63,7 @@ correct format requested by the customer and must be mapped to the desired struc
 
 ```ts
 {
-    id: String
-    role: String,
+    id: String,
     name: String,
     email: String,
     phones: Array<String>,
