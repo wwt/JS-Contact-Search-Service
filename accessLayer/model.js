@@ -3,7 +3,6 @@ const baseProps = {
     firstName: '',
     lastName: '',
     nickName: '',
-    role: 'Employee',
     primaryPhoneNumber: '',
     secondaryPhoneNumber: '',
     primaryEmail: '',
