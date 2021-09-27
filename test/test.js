@@ -54,7 +54,7 @@ describe('Contact Service', () => {
     
     afterEach(reset);
 
-	describe('search', () => {
+    describe('search', () => {
         describe('add event', () => {
             it('should return only contacts that match the search query', async () => {
                 const contact = createContact({ firstName: 'First', lastName: 'Last', primaryPhoneNumber: '314-555-0000'});
